@@ -8,6 +8,7 @@ import ThreadList from './components/ThreadList/ThreadList';
 import ThreadPost from './components/ThreadPost/ThreadPost';
 import UserProfile from './components/UserProfile/UserProfile';
 import NavigationBar from './components/NavigationBar/NavigationBar';
+import Login from './components/Login/Login';
 
 class App extends Component {
     constructor(props) {
@@ -34,7 +35,16 @@ class App extends Component {
                         </header>
 
                         <main>
-                            <Route exact={true} path="/" render={() => <ThreadList threads={this.state.threads} />} />
+                            <Route 
+                                exact={true} 
+                                path="/" 
+                                render={() => <ThreadList threads={this.state.threads} />} 
+                            />
+
+                            <Route
+                                path="/login"
+                                component={Login}
+                            />
 
                             <Route
                                 path="/thread/:id"
