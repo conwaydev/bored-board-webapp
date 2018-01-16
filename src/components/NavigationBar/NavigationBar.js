@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import * as auth from '../../auth/authentication';
@@ -20,7 +20,7 @@ class NavigationBar extends Component {
             <AppBar
                 title="VLV"
                 iconElementRight={auth.isLoggedIn() ? 
-                    <FlatButton label="Logout" onClick={this.logOut}/>
+                    <FlatButton label={"Logout " + auth.getUsername()} onClick={this.logOut}/>
                     : <FlatButton label="Login" containerElement={<Link to="/login" />}/>
                 }
             />
