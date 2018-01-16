@@ -4,10 +4,6 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
 class NavigationBar extends Component {
-    
-    constructor() {
-        super();
-    }
 
     render() {
         return (
