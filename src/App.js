@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {HashRouter as Router, Link, Route} from 'react-router-dom';
+import { HashRouter as Router, Link, Route, Redirect } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './App.scss';
@@ -9,6 +9,8 @@ import ThreadPost from './components/ThreadPost/ThreadPost';
 import UserProfile from './components/UserProfile/UserProfile';
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import Login from './components/Login/Login';
+import * as auth from './auth/authentication';
+
 
 class App extends Component {
     constructor(props) {
@@ -38,8 +40,13 @@ class App extends Component {
                             <Route 
                                 exact={true} 
                                 path="/"
-                                onEnter={requireAuth}
-                                render={() => <ThreadList threads={this.state.threads} />} 
+                                render={() => (
+                                    auth.isLoggedIn() ? (
+                                        <ThreadList />
+                                    ) : (
+                                        <Redirect to="/login" />
+                                    )
+                                )}
                             />
 
                             <Route
@@ -65,15 +72,6 @@ class App extends Component {
                 </Router>
             </MuiThemeProvider>
         );
-    }
-}
-
-function requireAuth(nextState, replace) {
-    if (!sessionStorage.jwt) {
-        replace({
-            pathname: '/login',
-            state: { nextPathname: nextState.location.pathname }
-        });
     }
 }
 

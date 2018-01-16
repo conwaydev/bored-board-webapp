@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import AuthService from '../../services/AuthService';
+import * as auth from '../../auth/authentication';
 
 class Login extends Component {
     constructor(props) {
@@ -19,7 +21,9 @@ class Login extends Component {
         
         AuthService.login(body)
             .then(response => {
-                sessionStorage.setItem("jwt", response.token);
+                if (response.token) {
+                    sessionStorage.setItem("jwt", response.token);
+                }
             })
             .catch(error => {
                 throw(error);
