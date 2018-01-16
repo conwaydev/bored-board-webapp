@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Timestamp from 'react-timestamp';
+import ThreadService from '../../services/ThreadService';
 
 class ThreadList extends Component {
 
@@ -10,9 +11,11 @@ class ThreadList extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:8000/threads`)
-            .then(result => result.json())
-            .then(threads => this.setState({threads}));
+        ThreadService.getAllThreads()
+            .then(response => this.setState({threads: response}))
+            .catch(error => {
+                throw(error);
+            });
     }
 
     render() {

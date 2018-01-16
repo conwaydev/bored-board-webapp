@@ -37,7 +37,8 @@ class App extends Component {
                         <main>
                             <Route 
                                 exact={true} 
-                                path="/" 
+                                path="/"
+                                onEnter={requireAuth}
                                 render={() => <ThreadList threads={this.state.threads} />} 
                             />
 
@@ -64,6 +65,15 @@ class App extends Component {
                 </Router>
             </MuiThemeProvider>
         );
+    }
+}
+
+function requireAuth(nextState, replace) {
+    if (!sessionStorage.jwt) {
+        replace({
+            pathname: '/login',
+            state: { nextPathname: nextState.location.pathname }
+        });
     }
 }
 

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import WebSocket from 'react-websocket';
 import ThreadReply from './ThreadReply/ThreadReply';
+import ThreadService from '../../services/ThreadService';
 
 class ThreadPost extends Component {
 
@@ -13,12 +14,16 @@ class ThreadPost extends Component {
 
     componentDidMount() {
         let threadId = this.props.match.params.id;
-        fetch(`http://localhost:8000/thread/${threadId}`)
-            .then(result => result.json())
-            .then(thread => this.setState({thread}));
-        fetch(`http://localhost:8000/posts/${threadId}`)
-            .then(result => result.json())
-            .then(posts => this.setState({posts}));    
+        ThreadService.getThread(threadId)
+            .then(thread => this.setState({thread}))
+            .catch(error => {
+                throw(error);
+            });
+        ThreadService.getPosts(threadId)
+            .then(posts => this.setState({posts}))
+            .catch(error => {
+                throw(error);
+            });   
     }
 
     handleSocket(data) {
@@ -59,7 +64,7 @@ class ThreadPost extends Component {
                 >
                 </ThreadReply>
 
-                <WebSocket url='ws://localhost:8000/ws'
+                <WebSocket url='ws://localhost:8000/ws' 
                     onMessage={this.handleSocket.bind(this)} />
             </div>
         );
