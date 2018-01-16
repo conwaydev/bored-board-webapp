@@ -6,15 +6,18 @@ import AuthService from '../../services/AuthService';
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state={username: '', password: ''}
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onUserNameChange = this.onUserNameChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        AuthService.login(this.state.username, this.state.password)
+        const data = new FormData(event.target);
+        let body = JSON.stringify({ 
+            username: data.get("username"), 
+            password: data.get("password")
+        });
+        
+        AuthService.login(body)
             .then(response => {
                 sessionStorage.setItem("jwt", response.token);
             })
@@ -23,37 +26,29 @@ class Login extends Component {
             });
     }
 
-    onUserNameChange(event) {
-        this.setState({username: event.target.value});
-    }
-
-    onPasswordChange(event) {
-        this.setState({password: event.target.value});
-    }
-
     render() { 
         return (
         <div>
+            <form onSubmit={this.handleSubmit}>
                 <TextField
                     hintText="Enter your Username"
                     floatingLabelText="Username"
-                    value={this.state.username}
-                    onChange={this.onUserNameChange}
+                    name="username"
                 />
                 <br/>
                 <TextField
                     type = "password"
                     hintText="Enter your Password"
                     floatingLabelText="Password"
-                    value={this.state.password}
-                    onChange={this.onPasswordChange}
+                    name="password"
                 />
                 <br/>
                 <RaisedButton 
                     label="Login" 
                     primary={true}
-                    onClick={this.handleSubmit}
+                    type="submit"
                 />
+            </form>
         </div>
         );
     }

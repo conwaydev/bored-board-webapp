@@ -1,15 +1,13 @@
 class AuthService {
-    login(username, password) {
+    login(data) {
         return fetch('http://localhost:8000/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })})
+            body: data
+            })
             .then(response => {
                 return response.json();
             })
