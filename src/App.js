@@ -56,7 +56,13 @@ class App extends Component {
 
                             <Route
                                 path="/thread/:id"
-                                component={ThreadPost}
+                                render={() => (
+                                    auth.isLoggedIn() ? (
+                                        <ThreadPost />
+                                    ) : (
+                                        <Redirect to="/login" />
+                                    )
+                                )}
                             />
 
                             <Route
