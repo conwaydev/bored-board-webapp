@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import { HashRouter as Router, Link, Route, Redirect } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -42,7 +43,7 @@ class App extends Component {
                                 path="/"
                                 render={() => (
                                     auth.isLoggedIn() ? (
-                                        <ThreadList />
+                                        <ThreadList threads={this.props.threads}/>
                                     ) : (
                                         <Redirect to="/login" />
                                     )
@@ -81,4 +82,10 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = function(state) {
+    return {
+        threads: state.threads
+    }
+}
+
+export default connect(mapStateToProps)(App);

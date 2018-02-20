@@ -5,6 +5,11 @@ import TextField from 'material-ui/TextField';
 import AuthService from '../../services/AuthService';
 import * as auth from '../../auth/authentication';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+    return { redirect: state.redirect };
+};
 
 class Login extends Component {
     constructor(props) {

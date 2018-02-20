@@ -1,28 +1,20 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Timestamp from 'react-timestamp';
-import ThreadService from '../../services/ThreadService';
+import {connect} from 'react-redux';
 
 class ThreadList extends Component {
 
-    constructor() {
-        super();
-        this.state = { threads: [] };
-    }
-
-    componentDidMount() {
-        ThreadService.getAllThreads()
-            .then(response => this.setState({threads: response}))
-            .catch(error => {
-                throw(error);
-            });
+    constructor(props) {
+        super(props);
     }
 
     render() {
         return (
             <div className='container'>
                 <ul>
-                    {this.state.threads.map(thread => {
+                    {this.props.threads.map(thread => {
                         return (
                             <li key={thread.Id}>
                                 <h3>
@@ -46,4 +38,14 @@ class ThreadList extends Component {
     }
 }
 
-export default ThreadList;
+ThreadList.propTypes = {
+    threads: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        threads: state.threads
+    };
+}
+
+export default connect(mapStateToProps)(ThreadList);
