@@ -1,3 +1,5 @@
+import * as auth from '../auth/authentication';
+
 class AuthService {
     login(data) {
         return fetch('http://localhost:8000/login', {
@@ -14,6 +16,10 @@ class AuthService {
             .catch(error => {
                 return error;
             });
+    }
+
+    logout() {
+        auth.logOut();
     }
 }
 

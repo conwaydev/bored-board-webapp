@@ -6,6 +6,7 @@ import AuthService from '../../services/AuthService';
 import * as auth from '../../auth/authentication';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import userActions from '../../actions/userActions';
 
 const mapStateToProps = state => {
     return { redirect: state.redirect };
@@ -14,9 +15,8 @@ const mapStateToProps = state => {
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            redirect: auth.isLoggedIn()
-        };
+        this.props.dispatch(userActions.logout());
+
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -73,5 +73,17 @@ class Login extends Component {
         );
     }
 }
+
+ThreadList.propTypes = {
+    threads: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        threads: state.threads
+    };
+}
+
+export default connect(mapStateToProps)(ThreadList);
 
 export default Login;

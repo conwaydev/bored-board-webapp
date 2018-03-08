@@ -16,16 +16,6 @@ import * as auth from './auth/authentication';
 class App extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            users: [
-                {
-                    id: 457,
-                    name: 'CoolGuy420',
-                    bio: 'Im so dope i am the best'
-                }
-            ]
-        };
     }
 
     render() {
@@ -43,7 +33,9 @@ class App extends Component {
                                 path="/"
                                 render={() => (
                                     auth.isLoggedIn() ? (
-                                        <ThreadList threads={this.props.threads}/>
+                                        <ThreadList 
+                                            threads={this.props.threads}
+                                        />
                                     ) : (
                                         <Redirect to="/login" />
                                     )
@@ -59,19 +51,13 @@ class App extends Component {
                                 path="/thread/:id"
                                 render={() => (
                                     auth.isLoggedIn() ? (
-                                        <ThreadPost />
+                                        <ThreadPost 
+                                            thread={this.props.thread} 
+                                            posts={this.props.posts}
+                                        />
                                     ) : (
                                         <Redirect to="/login" />
                                     )
-                                )}
-                            />
-
-                            <Route
-                                path="/user/:id"
-                                render={({match}) => (
-                                    <UserProfile
-                                        {...this.state.users.find(user => user.id === parseInt(match.params.id))}
-                                    />
                                 )}
                             />
                         </main>
