@@ -2,15 +2,12 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types';
 import AuthService from '../../services/AuthService';
 import * as auth from '../../auth/authentication';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import userActions from '../../actions/userActions';
-
-const mapStateToProps = state => {
-    return { redirect: state.redirect };
-};
 
 class Login extends Component {
     constructor(props) {
@@ -74,16 +71,14 @@ class Login extends Component {
     }
 }
 
-ThreadList.propTypes = {
-    threads: PropTypes.array.isRequired
+Login.propTypes = {
+    user: PropTypes.string
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        threads: state.threads
+        user: state.user
     };
 }
 
-export default connect(mapStateToProps)(ThreadList);
-
-export default Login;
+export default connect(mapStateToProps)(Login);
