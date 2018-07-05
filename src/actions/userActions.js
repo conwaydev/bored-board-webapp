@@ -1,22 +1,30 @@
-import * as types from '../constants/user-types';
-import AuthService from '../services/AuthService';
+import { userConstants } from '../constants/user-types';
+import { authService } from '../services/AuthService';
+import { history } from '../helpers/history';
 
-export function login(data) {
+export const userActions = {
+    login,
+    logout
+};
+
+function login(data) {
     return function(dispatch) {
-        return AuthService.login(data)
+        return authService.login(data)
             .then(user => {
                 dispatch(loginSuccess(user));
+                history.push('/');
             }).catch(error => {
                 throw(error);
             });
     };
 }
 
-export function logout() {
-    AuthService.logout();
-    return {type: types.LOGOUT};
+function logout() {
+    authService.logout();
+    return { type: userConstants.LOGOUT };
 }
 
-export function loginSuccess(user) {
-    return {type: types.LOGIN_SUCCESS, user};
+function loginSuccess(user) {
+    
+    return {type: userConstants.LOGIN_SUCCESS, user};
 }

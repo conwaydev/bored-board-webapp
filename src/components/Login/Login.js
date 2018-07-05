@@ -1,49 +1,42 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
-import AuthService from '../../services/AuthService';
 import * as auth from '../../auth/authentication';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import userActions from '../../actions/userActions';
+import { userActions } from '../../actions';
 
 class Login extends Component {
     constructor(props) {
         super(props);
+        
         this.props.dispatch(userActions.logout());
+
+        this.state = {
+            submitted: false
+        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault();
+
+        this.setState({ submitted: true });
+
         const data = new FormData(event.target);
         let body = JSON.stringify({ 
             username: data.get("username"), 
             password: data.get("password")
         });
-        
-        AuthService.login(body)
-            .then(response => {
-                if (response.token) {
-                    sessionStorage.setItem("jwt", response.token);
-                    this.setState({
-                        redirect: true
-                    });
-                }
-            })
-            .catch(error => {
-                throw(error);
-            });
+
+        const { dispatch } = this.props;
+
+        dispatch(userActions.login(body))
     }
 
     render() { 
-        if (this.state.redirect) {
-            return <Redirect to="/" />
-        }
-
         return (
         <div>
             <form onSubmit={this.handleSubmit}>
@@ -70,10 +63,6 @@ class Login extends Component {
         );
     }
 }
-
-Login.propTypes = {
-    user: PropTypes.string
-};
 
 function mapStateToProps(state, ownProps) {
     return {

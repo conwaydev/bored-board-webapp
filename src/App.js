@@ -12,6 +12,7 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 import Login from './components/Login/Login';
 import * as auth from './auth/authentication';
 
+import { history } from './helpers/history';
 
 class App extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <Router>
+                <Router history={history}>
                     <div>
                         <header>
                             <NavigationBar />
