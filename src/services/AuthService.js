@@ -1,4 +1,5 @@
 import * as auth from '../auth/authentication';
+import config from 'react-global-configuration';
 
 export const authService = {
     login,
@@ -6,7 +7,8 @@ export const authService = {
 };
 
 function login(data) {
-    return fetch('http://localhost:8000/login', {
+    let baseUrl = config.get('API_ROOT');
+    return fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

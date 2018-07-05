@@ -4,6 +4,7 @@ import Timestamp from 'react-timestamp';
 import WebSocket from 'react-websocket';
 import ThreadReply from './ThreadReply/ThreadReply';
 import ThreadService from '../../services/ThreadService';
+import config from 'react-global-configuration';
 
 class ThreadPost extends Component {
 
@@ -23,7 +24,7 @@ class ThreadPost extends Component {
             .then(posts => this.setState({posts}))
             .catch(error => {
                 throw(error);
-            });   
+            });    
     }
 
     handleSocket(data) {

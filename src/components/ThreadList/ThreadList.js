@@ -2,12 +2,30 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Timestamp from 'react-timestamp';
+<<<<<<< HEAD
 import {connect} from 'react-redux';
 
 class ThreadList extends Component {
 
     constructor(props) {
         super(props);
+=======
+import ThreadService from '../../services/ThreadService';
+
+class ThreadList extends Component {
+
+    constructor() {
+        super();
+        this.state = { threads: [] };
+    }
+
+    componentDidMount() {
+        ThreadService.getAllThreads()
+            .then(response => this.setState({threads: response}))
+            .catch(error => {
+                throw(error);
+            });
+>>>>>>> origin/master
     }
 
     render() {
