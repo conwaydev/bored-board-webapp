@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class ThreadList extends Component {
 
@@ -18,8 +18,13 @@ class ThreadList extends Component {
                         return (
                             <li key={thread.Id}>
                                 <h3>
-                                    <Link to={`/thread/${thread.Id}`}>
-                                        {thread.Title}
+                                    <Link to={
+                                            { 
+                                                pathname: `/thread/${thread.Id}`, 
+                                                state: { threadId: thread.Id }
+                                            }
+                                        }>
+                                        { thread.Title }
                                     </Link>
                                 </h3>
 

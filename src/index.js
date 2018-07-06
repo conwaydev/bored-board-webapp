@@ -3,13 +3,13 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import config from './config'
 import store from './store/index';
-import { loadThreads } from './actions/threadActions';
+import { threadActions } from './actions/threadActions';
 
 import App from './App';
 
 window.store = store;
 
-store.dispatch(loadThreads());
+store.dispatch(threadActions.loadThreads());
 
 render(
     <Provider store={store}>

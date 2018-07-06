@@ -50,11 +50,12 @@ class App extends Component {
 
                             <Route
                                 path="/thread/:id"
-                                render={() => (
+                                render={(props) => (
                                     auth.isLoggedIn() ? (
                                         <ThreadPost 
                                             thread={this.props.thread} 
                                             posts={this.props.posts}
+                                            {...props}
                                         />
                                     ) : (
                                         <Redirect to="/login" />
@@ -71,7 +72,9 @@ class App extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        threads: state.threads
+        threads: state.threads,
+        thread: state.thread,
+        posts: state.posts
     }
 }
 

@@ -25,6 +25,5 @@ function logout() {
 }
 
 function loginSuccess(user) {
-    
     return {type: userConstants.LOGIN_SUCCESS, user};
 }

@@ -1,23 +1,23 @@
-import * as types from '../constants/user-types';
+import { userConstants } from '../constants/user-types';
 
 let user = JSON.parse(localStorage.getItem('jwt'));
 const initialState = user ? { loggedIn: true, user } : {};
 
 export default function userReducer(state = initialState.user, action) {
     switch(action.type) {
-        case types.LOGIN_REQUEST:
+        case userConstants.LOGIN_REQUEST:
             return {
                 loggingIn: true,
                 user: action.user
             };
-        case types.LOGIN_SUCCESS:
+        case userConstants.LOGIN_SUCCESS:
             return {
                 loggedIn: true,
                 user: action.user
             };
-        case types.LOGIN_FAILURE:
+        case userConstants.LOGIN_FAILURE:
             return {};
-        case types.LOGOUT:
+        case userConstants.LOGOUT:
             return {};
         default:
             return state;

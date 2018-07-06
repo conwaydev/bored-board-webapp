@@ -1,30 +1,21 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import WebSocket from 'react-websocket';
 import ThreadReply from './ThreadReply/ThreadReply';
-import ThreadService from '../../services/ThreadService';
+import { connect } from 'react-redux';
 import config from 'react-global-configuration';
+import { threadActions } from '../../actions/index';
 
 class ThreadPost extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { thread: {}, posts: [] };
-    }
 
-    componentDidMount() {
-        let threadId = this.props.match.params.id;
-        ThreadService.getThread(threadId)
-            .then(thread => this.setState({thread}))
-            .catch(error => {
-                throw(error);
-            });
-        ThreadService.getPosts(threadId)
-            .then(posts => this.setState({posts}))
-            .catch(error => {
-                throw(error);
-            });    
+        let { id } = props.match.params;
+        
+        this.props.dispatch(threadActions.loadThread(id));
+        this.props.dispatch(threadActions.loadPosts(id));
     }
 
     handleSocket(data) {
@@ -39,11 +30,11 @@ class ThreadPost extends Component {
             <div className='container'>
                 <header>
                     <h1>
-                        {this.state.thread.Title }
+                        {this.props.thread.Title }
                     </h1>
                 </header>
                 <div>
-                {this.state.posts.map(post => {
+                {this.props.posts.map(post => {
                         return (
                             <li key={post.Id} className="post">
                                 <p>
@@ -60,8 +51,8 @@ class ThreadPost extends Component {
                     })}
                 </div>
                 <ThreadReply 
-                    userId={this.state.thread.UserId} 
-                    threadId={this.state.thread.Id}
+                    userId={this.props.thread.UserId} 
+                    threadId={this.props.thread.Id}
                 >
                 </ThreadReply>
 
@@ -72,4 +63,11 @@ class ThreadPost extends Component {
     }
 }
 
-export default ThreadPost;
+function mapStateToProps(state, ownProps) {
+    return {
+        thread: state.thread,
+        posts: state.posts
+    };
+}
+
+export default connect(mapStateToProps)(ThreadPost);
