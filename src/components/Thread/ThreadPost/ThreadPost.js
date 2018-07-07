@@ -19,8 +19,6 @@ class ThreadPost extends Component {
 
     handleSocket(data) {
         let result = JSON.parse(data);
-        console.log('Message recieved');
-        console.log(data);
         if (result.ThreadId == this.props.threadId) {
             this.props.dispatch(threadActions.recievePost(data));
         }
