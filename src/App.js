@@ -20,10 +20,6 @@ class App extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        this.props.dispatch(threadActions.loadThreads());
-    }
-
     render() {
         return (
             <MuiThemeProvider>

@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import { connect } from 'react-redux';
+import { threadActions } from '../../actions'; 
 
 class ThreadList extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(threadActions.loadThreads());
     }
 
     render() {
