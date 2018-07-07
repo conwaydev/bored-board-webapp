@@ -23,6 +23,7 @@ function logout() {
     return function(dispatch) {
         authService.logout();
         dispatch(logoutSuccess());
+        history.push('/login');
     }
 }
 
