@@ -9,7 +9,8 @@ export const threadActions = {
 
 function loadThreads() {
     return function(dispatch) {
-        return ThreadService.getAllThreads().then(threads => {
+        return ThreadService.getAllThreads()
+        .then(threads => {
             dispatch(loadThreadsSuccess(threads));
         }).catch(error => {
             throw(error);
@@ -19,7 +20,8 @@ function loadThreads() {
 
 function loadThread(threadId) {
     return function(dispatch) {
-        return ThreadService.getThread(threadId).then(thread => {
+        return ThreadService.getThread(threadId)
+        .then(thread => {
             dispatch(loadThreadSuccess(thread));
         }).catch(error => {
             throw(error);
@@ -29,7 +31,8 @@ function loadThread(threadId) {
 
 function loadPosts(threadId) {
     return function(dispatch) {
-        return ThreadService.getPosts(threadId).then(posts => {
+        return ThreadService.getPosts(threadId)
+        .then(posts => {
             dispatch(loadPostsSuccess(posts));
         }).catch(error => {
             throw(error);

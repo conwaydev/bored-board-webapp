@@ -18,12 +18,8 @@ class ThreadList extends Component {
                         return (
                             <li key={thread.Id}>
                                 <h3>
-                                    <Link to={
-                                            { 
-                                                pathname: `/thread/${thread.Id}`, 
-                                                state: { threadId: thread.Id }
-                                            }
-                                        }>
+                                    <Link to={{ pathname: `/thread/${thread.Id}`}}
+                                        >
                                         { thread.Title }
                                     </Link>
                                 </h3>
@@ -43,13 +39,11 @@ class ThreadList extends Component {
     }
 }
 
-ThreadList.propTypes = {
-    threads: PropTypes.array.isRequired
-};
-
 function mapStateToProps(state, ownProps) {
     return {
-        threads: state.threads
+        threads: state.threads,
+        thread: state.thread,
+        posts: state.posts
     };
 }
 

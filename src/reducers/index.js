@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
-import threads from './threadReducer';
+import threads from './threadsReducer';
+import thread from './threadReducer';
+import posts from './postsReducer';
 
 const rootReducer = combineReducers({
-    threads
+    threads,
+    thread
 })
 
 export default rootReducer;

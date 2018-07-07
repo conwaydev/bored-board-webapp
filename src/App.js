@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.scss';
 
 import ThreadList from './components/ThreadList/ThreadList';
-import ThreadPost from './components/ThreadPost/ThreadPost';
+import Thread from './components/Thread/Thread';
 import UserProfile from './components/UserProfile/UserProfile';
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import Login from './components/Login/Login';
@@ -52,9 +52,7 @@ class App extends Component {
                                 path="/thread/:id"
                                 render={(props) => (
                                     auth.isLoggedIn() ? (
-                                        <ThreadPost 
-                                            thread={this.props.thread} 
-                                            posts={this.props.posts}
+                                        <Thread 
                                             {...props}
                                         />
                                     ) : (
@@ -72,9 +70,7 @@ class App extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        threads: state.threads,
-        thread: state.thread,
-        posts: state.posts
+        threads: state.threads
     }
 }
 

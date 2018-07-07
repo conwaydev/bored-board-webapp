@@ -20,7 +20,13 @@ function login(data) {
 }
 
 function logout() {
-    authService.logout();
+    return function(dispatch) {
+        authService.logout();
+        dispatch(logoutSuccess());
+    }
+}
+
+function logoutSuccess() {
     return { type: userConstants.LOGOUT };
 }
 
