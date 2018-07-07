@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
+import * as auth from '../../auth/authentication';
 import { connect } from 'react-redux';
 import { userActions } from '../../actions/index';
 
