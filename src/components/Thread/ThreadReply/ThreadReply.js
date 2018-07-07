@@ -47,7 +47,7 @@ class ThreadReply extends Component {
                     value={this.state.value} 
                     onChange={this.handleChange} 
                     multiLine={true} 
-                    rows="5" 
+                    rows={5} 
                 />
                 <RaisedButton 
                     label="say it!" 
