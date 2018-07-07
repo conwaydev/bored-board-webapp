@@ -6,16 +6,15 @@ export default function postsReducer(state = initialState.posts, action) {
         case threadConstants.LOAD_POSTS_SUCCESS:
             return action.posts
         case threadConstants.ADD_POST:
-            return Object.assign({}, state, {
-                posts : state.concat({
-                    Id: action.post.Id,
-                    UserId: action.post.UserId,
-                    ThreadId: action.post.ThreadId,
-                    Body: action.post.Body,
-                    PostedAt: action.post.PostedAt
-                })
-            });
+            let newArray = insertItem(state, action.post)
+            return newArray;
         default:
             return state;
     }
+}
+
+function insertItem(array, action) {
+    let newArray = array.slice();
+    newArray.push(action);
+    return newArray;
 }

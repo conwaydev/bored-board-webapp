@@ -36,6 +36,7 @@ class Thread extends Component {
                 <ThreadReply 
                     userId={this.props.thread.UserId} 
                     threadId={this.props.thread.Id}
+                    value=''
                     >
                 </ThreadReply>
 
