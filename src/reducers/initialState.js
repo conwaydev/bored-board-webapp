@@ -1,5 +1,6 @@
 export default {
     threads: [],
     thread: {},
-    posts: []
+    posts: [],
+    user: {}
 }

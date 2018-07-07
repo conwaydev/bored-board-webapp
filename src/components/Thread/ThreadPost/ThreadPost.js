@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import WebSocket from 'react-websocket';
 import { connect } from 'react-redux';
-import config from 'react-global-configuration';
 import { threadActions } from '../../../actions/index';
 
 class ThreadPost extends Component {

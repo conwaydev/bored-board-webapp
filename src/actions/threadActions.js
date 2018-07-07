@@ -4,7 +4,8 @@ import { threadConstants } from '../constants/action-types';
 export const threadActions = {
     loadThreads,
     loadThread,
-    loadPosts
+    loadPosts,
+    addPost
 };
 
 function loadThreads() {
@@ -40,6 +41,28 @@ function loadPosts(threadId) {
     };
 }
 
+function addPost(threadId, userId, post) {
+    return function(dispatch) {
+        return ThreadService.postPost(threadId, userId, post)
+        .then(response => {
+            dispatch(addPostSuccess(stubPost(response, threadId, userId, post)));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+function stubPost(response, threadId, userId, post) {
+    let thing = response;
+    return {
+        Id: response.id,
+        ThreadId: threadId,
+        UserId: userId,
+        Body: post,
+        PostedAt: Date.now()
+    };
+}
+
 function loadThreadsSuccess(threads) {
     return { type: threadConstants.LOAD_THREADS_SUCCESS, threads };
 }
@@ -50,4 +73,8 @@ function loadThreadSuccess(thread) {
 
 function loadPostsSuccess(posts) {
     return { type: threadConstants.LOAD_POSTS_SUCCESS, posts };
+}
+
+function addPostSuccess(post) {
+    return { type: threadConstants.ADD_POST, post };
 }
