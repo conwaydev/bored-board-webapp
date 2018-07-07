@@ -9,8 +9,6 @@ import App from './App';
 
 window.store = store;
 
-store.dispatch(threadActions.loadThreads());
-
 render(
     <Provider store={store}>
         <App />

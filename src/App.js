@@ -11,12 +11,17 @@ import UserProfile from './components/UserProfile/UserProfile';
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import Login from './components/Login/Login';
 import * as auth from './auth/authentication';
+import { threadActions } from './actions';
 
 import { history } from './helpers/history';
 
 class App extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(threadActions.loadThreads());
     }
 
     render() {
