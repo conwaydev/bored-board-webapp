@@ -4,21 +4,27 @@ import Timestamp from 'react-timestamp';
 import WebSocket from 'react-websocket';
 import { connect } from 'react-redux';
 import { threadActions } from '../../../actions/index';
+import config from 'react-global-configuration';
 
 class ThreadPost extends Component {
 
     constructor(props) {
         super(props);
 
+        this.state = {
+            baseUrl: config.get('WS_ROOT')
+        }
         this.props.dispatch(threadActions.loadPosts(this.props.threadId));
     }
 
-    // handleSocket(data) {
-    //     let result = JSON.parse(data);
-    //     if (result.ThreadId == this.props.match.params.id) {
-    //         this.setState({posts: this.state.posts.concat([result])});
-    //     }
-    // }
+    handleSocket(data) {
+        let result = JSON.parse(data);
+        console.log('Message recieved');
+        console.log(data);
+        if (result.ThreadId == this.props.threadId) {
+            this.props.dispatch(threadActions.recievePost(data));
+        }
+    }
 
     render() {
         return (
@@ -40,6 +46,9 @@ class ThreadPost extends Component {
                         )
                     })}
                 </ul>
+
+                <WebSocket url={'ws://' + this.state.baseUrl + '/ws'}
+                    onMessage={this.handleSocket.bind(this)} />
             </div>
         );
     }
