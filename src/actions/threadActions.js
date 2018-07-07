@@ -53,13 +53,14 @@ function addPost(threadId, userId, post) {
 }
 
 function stubPost(response, threadId, userId, post) {
-    let thing = response;
+    let time = Date.now();
+    let formatDate = new Date(time);
     return {
         Id: response.id,
         ThreadId: threadId,
         UserId: userId,
         Body: post,
-        PostedAt: Date.now()
+        PostedAt: formatDate
     };
 }
 
