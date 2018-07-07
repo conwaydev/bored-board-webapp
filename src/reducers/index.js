@@ -5,7 +5,8 @@ import posts from './postsReducer';
 
 const rootReducer = combineReducers({
     threads,
-    thread
+    thread,
+    posts
 })
 
 export default rootReducer;

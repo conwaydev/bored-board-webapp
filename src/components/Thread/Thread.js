@@ -14,6 +14,9 @@ class Thread extends Component {
         super(props);
 
         let { id } = props.match.params;
+        this.state = {
+            threadId: id
+        }
 
         this.props.dispatch(threadActions.loadThread(id));
     }
@@ -27,7 +30,7 @@ class Thread extends Component {
                     </h1>
                 </header>
                 <ThreadPost
-                    threadId={ this.props.thread.Id }
+                    threadId={ this.state.threadId }
                     >
                 </ThreadPost>
                 <ThreadReply 
