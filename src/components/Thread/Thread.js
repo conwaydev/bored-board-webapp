@@ -34,6 +34,7 @@ class Thread extends Component {
                     >
                 </ThreadPost>
                 <ThreadReply 
+                    // TODO: Gotta fix this, sending in the threads userId, not the users Id
                     userId={this.props.thread.UserId} 
                     threadId={this.props.thread.Id}
                     value=''
