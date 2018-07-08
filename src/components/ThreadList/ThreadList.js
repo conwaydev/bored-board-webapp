@@ -18,7 +18,7 @@ class ThreadList extends Component {
     render() {
         return (
             <div className='container'>
-                <ul>
+                <ul className='threadListUl'>
                     {this.props.threads.map(thread => {
                         return (
                             <li key={thread.Id}>
@@ -28,12 +28,11 @@ class ThreadList extends Component {
                                         { thread.Title }
                                     </Link>
                                 </h3>
-
+                                
                                 <p>
-                                    <Link to={`/user/${thread.UserId}`}>
-                                        
-                                    </Link>
-                                    on <Timestamp time={thread.PostedAt} format="full" />
+                                    &nbsp;by: <Link to={`/user/${thread.UserId}`}>
+                                        {thread.UserId}
+                                    </Link> on <Timestamp time={thread.PostedAt} format="full" />
                                 </p>
                             </li>
                         )

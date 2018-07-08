@@ -27,15 +27,15 @@ class ThreadPost extends Component {
     render() {
         return (
             <div className="posts">
-                <ul>
+                <ul className="postsListUl">
                 {this.props.posts.map(post => {
                         return (
                             <li key={post.Id} className="post">
                                 <p>
-                                    <Link to={`/user/${post.UserId}`}>
-                                        
+                                    by: <Link to={`/user/${post.UserId}`}>
+                                        {post.UserId}
                                     </Link>
-                                    on <Timestamp time={post.PostedAt} format="full" />
+                                    &nbsp;on <Timestamp time={post.PostedAt} format="full" />
                                 </p>
                                 <p>
                                     {post.Body}

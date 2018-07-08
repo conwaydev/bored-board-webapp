@@ -24,3 +24,17 @@ body {
     transition: opacity 0.5s;
     opacity: 1;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.threadListUl h3, .threadListUl p { display: inline; }
+
+.postsListUl {
+    padding: 20px;
+}
+
+.postsListUl li {
+    margin: 5px;
+}
