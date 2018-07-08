@@ -33,7 +33,7 @@ class ThreadPost extends Component {
                             <li key={post.Id} className="post">
                                 <p>
                                     by: <Link to={`/user/${post.UserId}`}>
-                                        {post.Username}
+                                        {post.UserName}
                                     </Link>
                                     &nbsp;on <Timestamp time={post.PostedAt} format="full" />
                                 </p>

@@ -7,6 +7,7 @@ import ThreadPost from './ThreadPost/ThreadPost';
 import { connect } from 'react-redux';
 import config from 'react-global-configuration';
 import { threadActions } from '../../actions/index';
+import * as auth from '../../auth/authentication';
 
 class Thread extends Component {
 
@@ -15,7 +16,8 @@ class Thread extends Component {
 
         let { id } = props.match.params;
         this.state = {
-            threadId: id
+            threadId: id,
+            userId: auth.getUserId()
         }
 
         this.props.dispatch(threadActions.loadThread(id));
@@ -38,8 +40,7 @@ class Thread extends Component {
                     >
                 </ThreadPost>
                 <ThreadReply 
-                    // TODO: Gotta fix this, sending in the threads userId, not the users Id
-                    userId={this.props.thread.UserId} 
+                    userId={this.state.userId} 
                     threadId={this.props.thread.Id}
                     value=''
                     >
