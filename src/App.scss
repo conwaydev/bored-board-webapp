@@ -31,14 +31,27 @@ ul {
 
 .threadListUl h3, .threadListUl p { display: inline; }
 
+.threadListUl li {
+    padding: 2px;
+}
+
 .postsListUl {
-    padding: 20px;
+    padding: 10px;
 }
 
 .postsListUl li {
-    margin: 5px;
+    margin: 2px;
 }
 
 .postsListUl p {
     margin: 5px;
+}
+
+.loginFormDiv {
+    padding: 10px;
+    text-align: center;
+}
+
+.loginFormDiv h3, h4, p {
+    padding: 10px;
 }

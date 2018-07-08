@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
@@ -38,7 +38,9 @@ class Login extends Component {
 
     render() { 
         return (
-        <div>
+        <div className="loginFormDiv">
+            <h3>Welcome to VLV!</h3>
+            <p> Enter your credentials to login and start shit posting </p>
             <form onSubmit={this.handleSubmit}>
                 <TextField
                     hintText="Enter your Username"
@@ -59,6 +61,8 @@ class Login extends Component {
                     type="submit"
                 />
             </form>
+            <h4>Don't have an account?</h4>
+            <p>Go <Link to="/register">here</Link> to register.</p>
         </div>
         );
     }
