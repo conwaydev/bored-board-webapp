@@ -25,6 +25,9 @@ class Thread extends Component {
         return (
             <div className='container'>
                 <header>
+                    <h3 className="backToIt">
+                        <Link to={`/`}>Back to it</Link>
+                    </h3>
                     <h1>
                         {this.props.thread.Title }
                     </h1>
