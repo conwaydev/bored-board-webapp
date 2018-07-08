@@ -10,8 +10,6 @@ import { userActions } from '../../actions';
 class Login extends Component {
     constructor(props) {
         super(props);
-        
-        this.props.dispatch(userActions.logout());
 
         this.state = {
             submitted: false
