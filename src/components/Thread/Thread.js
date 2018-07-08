@@ -31,7 +31,7 @@ class Thread extends Component {
                     <h1>
                         {this.props.thread.Title }
                     </h1>
-                    by: {this.props.thread.UserName } on <Timestamp time={this.props.thread.PostedAt} format="full" />
+                    by: <Link to={`/user/${this.props.thread.UserId}`}>{this.props.thread.UserName }</Link> on <Timestamp time={this.props.thread.PostedAt} format="full" />
                 </header>
                 <ThreadPost
                     threadId={ this.state.threadId }
