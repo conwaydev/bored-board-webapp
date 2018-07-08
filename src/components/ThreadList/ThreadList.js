@@ -31,7 +31,7 @@ class ThreadList extends Component {
                                 
                                 <p>
                                     &nbsp;by: <Link to={`/user/${thread.UserId}`}>
-                                        {thread.UserId}
+                                        {thread.UserName}
                                     </Link> on <Timestamp time={thread.PostedAt} format="full" />
                                 </p>
                             </li>
