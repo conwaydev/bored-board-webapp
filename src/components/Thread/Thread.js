@@ -45,9 +45,6 @@ class Thread extends Component {
                     value=''
                     >
                 </ThreadReply>
-
-                {/* <WebSocket url='ws://localhost:8000/ws' 
-                    onMessage={this.handleSocket.bind(this)} /> */}
             </div>
         );
     }
